@@ -1,0 +1,42 @@
+body {
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+table {
+    margin-bottom: 130px;
+    padding: 20px;
+    border: 0px solid black;
+}
+
+@media print {
+    table {
+      break-inside: avoid;
+    }
+  }
+
+td {
+    padding-left: 5px;
+    padding-right: 5px
+}
+
+.doc-type {
+    font-weight: bolder;
+    font-size: 20pt;
+    vertical-align: top;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.col-header {
+    padding-top: 20px;
+    font-weight: bold;
+    font-size: large;
+}
+
+.current {
+    vertical-align: top;
+}

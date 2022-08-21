@@ -1,0 +1,71 @@
+{# templates/check_template.html #}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Checks</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="check-container">
+  {% for student in students %}
+  <table>
+    <tr>
+      <td colspan="3" class="dba">
+        <div>Freshman Focus</div>
+        <div>1349 Arcade St</div>
+        <div>Saint Paul, MN 55106</div></td>
+      <td colspan="3" class="doc-type align-right">EARNINGS STATEMENT</td>
+    </tr>
+    <tr class="header-row">
+      <td colspan="4" class="col-header">EMPLOYEE NAME</td>
+      <td colspan="4" class="col-header align-right">PAY DATE</td>
+    </tr>
+    <tr>
+      <td colspan="4">{{ student.name }}</td>
+      <td colspan="2" class="align-right">{{ student.date }}</td>
+    </tr>
+    <tr class="header-row">
+      <td class="col-header">INCOME</td>
+      <td class="col-header">RATE</td>
+      <td class="col-header">HOURS</td>
+      <td class="col-header">TOTAL</td>
+      <td class="col-header">DEDUCTIONS</td>
+      <td class="col-header align-right">TOTAL</td>
+    </tr>
+    <tr>
+      <td class="current">GROSS WAGES</td>
+      <td class="current">{{ "%0.2f"|format(student.payrate) }}</td>
+      <td class="current">{{ "%0.2f"|format(student.hours) }}</td>
+      <td class="current">{{ "%0.2f"|format(student.gross) }}</td>
+      <td>
+        {% for attr in student.deductions.keys() -%}
+        <div>{{ attr }}</div>  
+        {% endfor -%}
+      </td>
+      <td>
+        {% for attr in student.deductions.keys() -%}
+        <div class="align-right">{{ "%0.2f"|format(student.deductions[attr]) }}</div> 
+        {% endfor -%} 
+      </td>
+    </tr>
+    <tr class="header-row">
+      <td colspan="3"></td>
+      <td class="col-header">TOTAL</td>
+      <td class="col-header">DEDUCTIONS</td>
+      <td class="col-header">NET PAY</td>
+    </tr>
+    <tr>
+      <td colspan="3"></td>
+      <td>{{ "%0.2f"|format(student.gross) }}</td>
+      <td>{{ "%0.2f"|format(student.total_deductions) }}</td>
+      <td>{{ "%0.2f"|format(student.net) }}</td>
+    </tr>
+  </table>
+
+  {% endfor %}
+  </div>
+</body>
+</html>
